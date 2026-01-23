@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio — Digital Product Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">Studio</div>
+                <div class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#work">Work</a>
+                    <a href="#process">Process</a>
+                    <a href="#about">About</a>
+                    <a href="#contact" class="btn-primary">Start a Project</a>
+                </div>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-headline">
+                    We design & build<br>
+                    <span class="gradient-text">digital products</span><br>
+                    that scale
+                </h1>
+                <p class="hero-subhead">
+                    Partnering with ambitious startups and established companies to create 
+                    exceptional digital experiences that drive growth and engagement.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Start a Project</a>
+                    <a href="#work" class="btn btn-secondary">View Work</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title">Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Website Design & Development</h3>
+                    <p>Custom websites that combine stunning design with high-performance engineering. From landing pages to complex web applications.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="5" y="2" width="14" height="20" rx="2"/>
+                            <line x1="12" y1="18" x2="12" y2="18.01"/>
+                        </svg>
+                    </div>
+                    <h3>Web & Mobile App Development</h3>
+                    <p>Native and cross-platform mobile applications, plus progressive web apps. Built for scale, performance, and user delight.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>Product Strategy & UX Research</h3>
+                    <p>Data-driven product strategy and user research to ensure your product solves real problems and delivers measurable results.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <line x1="9" y1="3" x2="9" y2="21"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Design Systems & UI Engineering</h3>
+                    <p>Comprehensive design systems and component libraries that ensure consistency, speed up development, and scale with your team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="work" class="case-studies">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="device-mockup">
+                            <div class="browser-frame">
+                                <div class="browser-bar">
+                                    <div class="browser-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <div class="browser-url">tryflowly.us</div>
+                                </div>
+                                <iframe 
+                                    src="https://www.tryflowly.us/" 
+                                    class="website-preview"
+                                    loading="lazy"
+                                    title="TryFlowly Preview"
+                                    allow="fullscreen"
+                                ></iframe>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="project-category">Web App</span>
+                            <a href="https://www.tryflowly.us/" target="_blank" rel="noopener noreferrer" class="project-link">Visit Website →</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>TryFlowly</h3>
+                        <p>Live Pilates & Yoga platform connecting students with world-class instructors. Features real-time classes, instructor profiles, and seamless booking system for wellness transformation.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="device-mockup">
+                            <div class="browser-frame">
+                                <div class="browser-bar">
+                                    <div class="browser-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <div class="browser-url">dalmatianrescue.com</div>
+                                </div>
+                                <iframe 
+                                    src="https://www.dalmatianrescue.com/" 
+                                    class="website-preview"
+                                    loading="lazy"
+                                    title="Dalmatian Rescue Preview"
+                                    allow="fullscreen"
+                                ></iframe>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="project-category">Website</span>
+                            <a href="https://www.dalmatianrescue.com/" target="_blank" rel="noopener noreferrer" class="project-link">Visit Website →</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Dalmatian Rescue SoFL</h3>
+                        <p>Compassionate animal rescue website featuring adoption process, available dogs, and community resources. Built to help every spotted heart find a loving home.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="device-mockup">
+                            <div class="browser-frame">
+                                <div class="browser-bar">
+                                    <div class="browser-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <div class="browser-url">fosterfi.com</div>
+                                </div>
+                                <iframe 
+                                    src="https://contatoheloisaroma.wixsite.com/mysite" 
+                                    class="website-preview"
+                                    loading="lazy"
+                                    title="FosterFi Preview"
+                                    allow="fullscreen"
+                                ></iframe>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="project-category">Web App</span>
+                            <a href="https://contatoheloisaroma.wixsite.com/mysite" target="_blank" rel="noopener noreferrer" class="project-link">Visit Website →</a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>FosterFi</h3>
+                        <p>Community platform for animal rescue organizations. Streamlines foster networks, tracks expenses, manages donations, and connects volunteers to scale rescue operations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">How We Work</span>
+                <h2 class="section-title">Our Process</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <h3>Research & Discovery</h3>
+                    <p>We start by understanding your business goals, target audience, and market landscape to identify opportunities and define the project scope.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Strategy & Planning</h3>
+                    <p>We develop user journeys, information architecture, and a comprehensive product strategy that aligns with your business objectives and user needs.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        </svg>
+                    </div>
+                    <h3>Design & Prototyping</h3>
+                    <p>We create beautiful, intuitive interfaces and build interactive prototypes to validate design concepts and gather feedback before development begins.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Development & Launch</h3>
+                    <p>We build your product using modern technologies and best practices, then launch it with ongoing support to ensure success and scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-label">About Us</span>
+                    <h2 class="section-title">Why Partner With Us</h2>
+                    <p class="about-description">
+                        We're a team of designers, developers, and product strategists who are passionate about 
+                        creating digital products that make a difference. With a focus on collaboration, product 
+                        thinking, and measurable results, we've helped launch 50+ products for startups and 
+                        established companies worldwide.
+                    </p>
+                    <p class="about-description">
+                        Our approach combines deep technical expertise with strategic thinking and exceptional 
+                        design. We don't just build products—we help you build businesses.
+                    </p>
+                    <div class="about-metrics">
+                        <div class="metric">
+                            <div class="metric-number">50+</div>
+                            <div class="metric-label">Products Launched</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-number">30+</div>
+                            <div class="metric-label">Global Clients</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-number">8</div>
+                            <div class="metric-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Client Stories</span>
+                <h2 class="section-title">What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "Studio transformed our product vision into reality. Their attention to detail, 
+                        technical expertise, and collaborative approach made the entire process seamless."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Sarah Chen</div>
+                        <div class="author-role">CEO, TechStart Inc.</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "Working with Studio was a game-changer. They didn't just build a website—they 
+                        built a digital experience that our customers love and that drives real business results."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Michael Rodriguez</div>
+                        <div class="author-role">Founder, CommerceFlow</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                    </div>
+                    <p class="testimonial-text">
+                        "The team's product thinking and design expertise helped us launch faster and 
+                        with more confidence. Highly recommend for any ambitious product team."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Emily Watson</div>
+                        <div class="author-role">Product Lead, InnovateCo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Build Something Great?</h2>
+                <p class="cta-subtitle">Let's discuss your project and explore how we can help bring your vision to life.</p>
+                <div class="cta-actions">
+                    <a href="#contact-form" class="btn btn-primary">Book a Call</a>
+                    <a href="mailto:hello@studio.com" class="btn btn-secondary">Send Email</a>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell us about your project</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">Studio</div>
+                    <p>Designing and building digital products that scale.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="#services">Web Development</a>
+                        <a href="#services">Mobile Apps</a>
+                        <a href="#services">Product Strategy</a>
+                        <a href="#services">Design Systems</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#about">About</a>
+                        <a href="#work">Work</a>
+                        <a href="#process">Process</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Dribbble</a>
+                        <a href="mailto:hello@studio.com">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
