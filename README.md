@@ -1,4 +1,4 @@
-# Studio — Digital Product Agency Website
+# Modulrus — Digital Product Agency Website
 
 A modern, high-end digital product agency website featuring premium design, smooth animations, and interactive elements. Built with vanilla HTML, CSS, and JavaScript.
 
@@ -45,6 +45,44 @@ A modern, high-end digital product agency website featuring premium design, smoo
 You can also use the website without npm:
 - Simply open `index.html` in your web browser
 - Or use any local server (Python, PHP, etc.)
+
+## Deployment to modulrus.com
+
+### GitHub Pages Setup
+
+1. **Enable GitHub Pages:**
+   - Go to your repository settings on GitHub
+   - Navigate to "Pages" in the left sidebar
+   - Under "Source", select "GitHub Actions"
+   - Save the changes
+
+2. **Domain Configuration:**
+   - The `CNAME` file is already configured with `modulrus.com` and `www.modulrus.com`
+   - In your domain registrar (where you bought modulrus.com), add these DNS records:
+     - **Type:** A
+     - **Name:** @
+     - **Value:** 185.199.108.153
+     - **Value:** 185.199.109.153
+     - **Value:** 185.199.110.153
+     - **Value:** 185.199.111.153
+   
+   - For www subdomain:
+     - **Type:** CNAME
+     - **Name:** www
+     - **Value:** lisahall1607.github.io
+
+3. **Automatic Deployment:**
+   - The GitHub Actions workflow will automatically deploy on every push to `main`
+   - Your site will be live at https://modulrus.com
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+```bash
+git add .
+git commit -m "Deploy to modulrus.com"
+git push origin main
+```
 
 ## Customization
 

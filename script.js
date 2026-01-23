@@ -385,5 +385,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
 
     console.log('%c👋 Hello! Interested in working together?', 'font-size: 16px; color: #6366f1; font-weight: bold;');
-    console.log('%cGet in touch: hello@studio.com', 'font-size: 12px; color: #a0a0a0;');
+    console.log('%cGet in touch: hello@modulrus.com', 'font-size: 12px; color: #a0a0a0;');
 });
