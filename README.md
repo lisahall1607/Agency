@@ -1,4 +1,4 @@
-# Modulrus — Digital Product Agency Website
+# Modulr — Digital Product Agency Website
 
 A modern, high-end digital product agency website featuring premium design, smooth animations, and interactive elements. Built with vanilla HTML, CSS, and JavaScript.
 
