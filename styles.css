@@ -303,7 +303,7 @@ a.btn-primary:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) 0;
+    padding: 120px 0 var(--spacing-xl) 0;
     overflow: hidden;
 }
 
@@ -379,7 +379,7 @@ a.btn-primary:hover {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 700;
     line-height: 1.1;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     will-change: opacity, transform;
 }
@@ -395,6 +395,7 @@ a.btn-primary:hover {
     font-size: clamp(1rem, 2vw, 1.25rem);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-lg);
+    margin-top: 0;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -453,7 +454,7 @@ a.btn-primary:hover {
    ============================================ */
 
 section {
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
     position: relative;
 }
 
@@ -1574,19 +1575,24 @@ section {
     
     .hero {
         min-height: 85vh;
-        padding: var(--spacing-md) 0;
+        padding: 100px 0 var(--spacing-md) 0;
     }
     
     .hero-headline {
         font-size: clamp(1.75rem, 8vw, 3rem);
         line-height: 1.2;
-        margin-bottom: var(--spacing-sm);
+        margin-bottom: 1.25rem;
     }
     
     .hero-subhead {
         font-size: 1rem;
         margin-bottom: var(--spacing-md);
+        margin-top: 0;
         padding: 0 var(--spacing-sm);
+    }
+    
+    section {
+        padding: var(--spacing-md) 0;
     }
     
     .hero-cta {
@@ -1694,15 +1700,24 @@ section {
         height: 32px;
     }
     
+    .hero {
+        padding: 80px 0 var(--spacing-sm) 0;
+    }
+    
     .hero-headline {
         font-size: clamp(1.5rem, 7vw, 2.5rem);
         line-height: 1.15;
-        margin-bottom: var(--spacing-xs);
+        margin-bottom: 1rem;
     }
     
     .hero-subhead {
         font-size: 0.9rem;
+        margin-top: 0;
         padding: 0;
+    }
+    
+    section {
+        padding: var(--spacing-md) 0;
     }
     
     .hero-cta {
