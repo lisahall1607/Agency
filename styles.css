@@ -1704,9 +1704,12 @@ section {
     
     .hero {
         min-height: auto;
-        padding: 20px 0 var(--spacing-sm) 0;
+        padding: 100px 0 var(--spacing-sm) 0;
         align-items: flex-start;
-        padding-top: 100px;
+    }
+    
+    .hero-content {
+        margin-top: 0;
     }
     
     .hero-content {
