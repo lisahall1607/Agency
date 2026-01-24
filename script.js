@@ -3,6 +3,17 @@
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent auto-scroll to hash on page load
+    if (window.location.hash) {
+        // Remove hash from URL without scrolling
+        const hash = window.location.hash;
+        window.history.replaceState(null, null, ' ');
+        // Restore hash in URL without scrolling
+        setTimeout(() => {
+            window.history.replaceState(null, null, hash);
+        }, 0);
+    }
+    
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
