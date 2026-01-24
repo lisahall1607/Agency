@@ -303,7 +303,7 @@ a.btn-primary:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) 0;
+    padding: 100px 0 var(--spacing-xl) 0;
     overflow: hidden;
 }
 
@@ -1699,9 +1699,13 @@ section {
     }
     
     .hero-headline {
-        font-size: clamp(1.5rem, 7vw, 2.5rem);
+        font-size: clamp(2rem, 8vw, 3rem);
         line-height: 1.15;
         margin-bottom: var(--spacing-xs);
+    }
+    
+    .hero-subhead {
+        font-size: 1rem;
     }
     
     .hero-subhead {
