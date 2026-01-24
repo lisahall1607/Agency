@@ -75,14 +75,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-sm) 0;
+    padding: 1.5rem 0;
+    min-height: 80px;
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     text-decoration: none;
     color: inherit;
@@ -95,7 +96,7 @@ body {
 }
 
 .logo-icon {
-    height: 48px;
+    height: 56px;
     width: auto;
     display: block;
 }
@@ -116,7 +117,7 @@ body {
 .nav-links a {
     color: var(--color-text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: var(--transition-fast);
     position: relative;
@@ -1603,7 +1604,20 @@ section {
     }
     
     .nav-content {
-        padding: 0.75rem 0;
+        padding: 1.25rem 0;
+        min-height: 70px;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .logo-icon {
+        height: 48px;
+    }
+    
+    .nav-links a {
+        font-size: 0.95rem;
     }
     
     .services-grid,
@@ -1709,7 +1723,20 @@ section {
     }
     
     .nav-content {
-        padding: 0.5rem 0;
+        padding: 1rem 0;
+        min-height: 60px;
+    }
+    
+    .logo {
+        font-size: 1.25rem;
+    }
+    
+    .logo-icon {
+        height: 40px;
+    }
+    
+    .nav-links a {
+        font-size: 0.9rem;
     }
     
     .service-icon {
