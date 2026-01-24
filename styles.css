@@ -1554,6 +1554,15 @@ section {
         display: flex;
     }
     
+    .logo {
+        font-size: 1.25rem;
+        gap: 0.35rem;
+    }
+    
+    .logo-icon {
+        height: 36px;
+    }
+    
     .hero {
         min-height: 90vh;
         padding: var(--spacing-lg) 0;
@@ -1565,6 +1574,8 @@ section {
     
     .hero-cta .btn {
         width: 100%;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
     }
     
     .services-grid,
@@ -1573,13 +1584,41 @@ section {
         grid-template-columns: 1fr;
     }
     
+    .service-icon {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .service-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .project-image {
+        height: 240px;
+    }
+    
     .process-steps {
         grid-template-columns: 1fr;
+    }
+    
+    .step-icon {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .step-icon svg {
+        width: 36px;
+        height: 36px;
     }
     
     .about-metrics {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
+    }
+    
+    .metric-number {
+        font-size: 2.5rem;
     }
     
     .form-row {
@@ -1604,11 +1643,53 @@ section {
         padding: 0 var(--spacing-sm);
     }
     
+    .logo {
+        font-size: 1.1rem;
+        gap: 0.3rem;
+    }
+    
+    .logo-icon {
+        height: 32px;
+    }
+    
     .hero-headline {
         font-size: 2rem;
     }
     
     .section-title {
+        font-size: 2rem;
+    }
+    
+    .service-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .service-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .step-icon {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .step-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.875rem;
+    }
+    
+    .metric-number {
         font-size: 2rem;
     }
 }
