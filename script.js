@@ -7,9 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            if (href === '#' || href === '#contact-form') return;
+            if (href === '#contact-form') return;
             
             e.preventDefault();
+            
+            // Handle scroll to top
+            if (href === '#' || href === '#top') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+            
             const target = document.querySelector(href);
             if (target) {
                 const offsetTop = target.offsetTop - 80;
