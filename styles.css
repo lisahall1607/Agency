@@ -87,9 +87,16 @@ body {
 }
 
 .logo-img {
-    height: 32px;
+    height: 40px;
     width: auto;
     display: block;
+    color: var(--color-accent);
+    filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.3));
+}
+
+.logo-img svg {
+    height: 100%;
+    width: auto;
 }
 
 .logo-text {
