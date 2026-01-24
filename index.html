@@ -379,7 +379,7 @@
                 <h2 class="cta-title">Ready to Build Something Great?</h2>
                 <p class="cta-subtitle">Let's discuss your project and explore how we can help bring your vision to life.</p>
                 <div class="cta-actions">
-                    <a href="#contact-form" class="btn btn-primary">Book a Call</a>
+                    <button class="btn btn-primary" id="book-call-btn">Book a Call</button>
                     <a href="mailto:hello@modulrus.com" class="btn btn-secondary">Send Email</a>
                 </div>
                 <form id="contact-form" class="contact-form">
@@ -447,6 +447,51 @@
             </div>
         </div>
     </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="booking-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2 class="modal-title">Book a Call</h2>
+            <p class="modal-subtitle">Select a date and time that works for you</p>
+            
+            <form id="booking-form" class="booking-form">
+                <div class="form-group">
+                    <label for="booking-name">Name</label>
+                    <input type="text" id="booking-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-email">Email</label>
+                    <input type="email" id="booking-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="booking-date">Select Date</label>
+                    <input type="date" id="booking-date" name="date" required min="">
+                </div>
+                <div class="form-group">
+                    <label for="booking-time">Select Time</label>
+                    <select id="booking-time" name="time" required>
+                        <option value="">Choose a time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="booking-message">Message (Optional)</label>
+                    <textarea id="booking-message" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

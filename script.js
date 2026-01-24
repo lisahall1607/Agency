@@ -398,6 +398,82 @@ document.addEventListener('DOMContentLoaded', function() {
     // All scroll events are properly throttled with requestAnimationFrame
 
     // ============================================
+    // Booking Modal
+    // ============================================
+
+    const bookCallBtn = document.getElementById('book-call-btn');
+    const bookingModal = document.getElementById('booking-modal');
+    const modalClose = document.querySelector('.modal-close');
+    const modalOverlay = document.querySelector('.modal-overlay');
+    const bookingForm = document.getElementById('booking-form');
+    const bookingDateInput = document.getElementById('booking-date');
+
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    if (bookingDateInput) {
+        bookingDateInput.setAttribute('min', today);
+    }
+
+    // Open modal
+    if (bookCallBtn) {
+        bookCallBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            bookingModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    // Close modal
+    function closeModal() {
+        bookingModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', closeModal);
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && bookingModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Handle booking form submission
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server or calendar service
+            console.log('Booking submitted:', data);
+            
+            // Show success message
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Booking Confirmed!';
+            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            
+            // Reset form
+            this.reset();
+            
+            // Close modal after 2 seconds
+            setTimeout(() => {
+                closeModal();
+                submitButton.textContent = originalText;
+                submitButton.style.background = '';
+            }, 2000);
+        });
+    }
+
+    // ============================================
     // Console Easter Egg
     // ============================================
 
