@@ -303,7 +303,7 @@ a.btn-primary:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) 0;
+    padding: 50px 0 var(--spacing-xl) 0;
     overflow: hidden;
 }
 
