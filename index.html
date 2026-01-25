@@ -493,49 +493,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDK - Load first -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-      
-        const firebaseConfig = {
-          apiKey: "AIzaSyBK4oPI7p4m_1tnN51c69c_znZvQx5ZTaY",
-          authDomain: "modulragency.firebaseapp.com",
-          projectId: "modulragency",
-          storageBucket: "modulragency.firebasestorage.app",
-          messagingSenderId: "196183451924",
-          appId: "1:196183451924:web:b602fe2ccb41a31de2fa01",
-          measurementId: "G-RLL00PQKKJ"
-        };
-      
-        try {
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            
-            // Initialize Firestore
-            const db = getFirestore(app);
-            
-            // Make db available globally for form submissions
-            window.firebaseDb = db;
-            window.firebaseReady = true;
-            
-            console.log("✅ Firebase initialized successfully!");
-            console.log("✅ Firestore database ready:", db);
-            
-            // Test connection
-            import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js').then(({ collection, getDocs }) => {
-                getDocs(collection(db, 'test')).catch(() => {
-                    console.log("ℹ️ Firestore connection test complete (test collection doesn't exist, which is normal)");
-                });
-            });
-            
-            // Dispatch custom event to notify that Firebase is ready
-            window.dispatchEvent(new CustomEvent('firebase-ready'));
-        } catch (error) {
-            console.error("❌ Firebase initialization error:", error);
-            window.firebaseReady = false;
-        }
-    </script>
     <script src="script.js"></script>      
 </body>
 </html>

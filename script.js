@@ -156,109 +156,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', data);
+            
+            // Show success message
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
+            submitButton.textContent = 'Message Sent!';
+            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
             
-            // Disable button during submission
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
+            // Reset form
+            this.reset();
             
-            try {
-                // Wait for Firebase to be ready
-                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
-                    // Wait a bit and try again
-                    await new Promise(resolve => {
-                        if (window.firebaseReady && window.firebaseDb) {
-                            resolve();
-                        } else {
-                            window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 2000); // Timeout after 2 seconds
-                        }
-                    });
-                    
-                    if (typeof window.firebaseDb === 'undefined') {
-                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
-                    }
-                }
-                
-                // Import Firestore functions
-                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
-                
-                console.log('Submitting contact form to Firebase...', data);
-                
-                // Add contact form submission to Firestore
-                const docRef = await addDoc(collection(window.firebaseDb, 'contacts'), {
-                    name: data.name,
-                    email: data.email,
-                    company: data.company || '',
-                    message: data.message,
-                    createdAt: serverTimestamp(),
-                    status: 'new'
-                });
-                
-                console.log('Contact form submitted successfully! Document ID:', docRef.id);
-                
-                // Show success message
-                submitButton.textContent = 'Message Sent!';
-                submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                
-                // Reset form
-                this.reset();
-                
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                }, 3000);
-            } catch (error) {
-                console.error('❌ Error submitting contact form:', error);
-                console.error('Error details:', {
-                    message: error.message,
-                    code: error.code,
-                    name: error.name,
-                    stack: error.stack
-                });
-                
-                // Show user-friendly error message
-                let errorMessage = 'Error - Please try again';
-                let errorDetails = '';
-                
-                if (error.code === 'permission-denied' || error.message?.includes('permission')) {
-                    errorMessage = 'Permission denied - Check Firestore rules';
-                    errorDetails = 'Go to Firebase Console → Firestore → Rules tab and update security rules. See FIRESTORE_RULES.md for instructions.';
-                    console.error('🔒 Firestore security rules need to be updated!');
-                    console.error('📋 Instructions: Check FIRESTORE_RULES.md file');
-                } else if (error.code === 'unavailable' || error.message?.includes('network')) {
-                    errorMessage = 'Network error - Check connection';
-                    errorDetails = 'Please check your internet connection and try again.';
-                } else if (error.message?.includes('not initialized') || error.message?.includes('Firebase')) {
-                    errorMessage = 'Firebase not ready - Refresh page';
-                    errorDetails = 'Firebase may not be loaded. Please refresh the page.';
-                } else if (error.code) {
-                    errorMessage = `Error: ${error.code}`;
-                    errorDetails = error.message || 'An unexpected error occurred.';
-                }
-                
-                if (errorDetails) {
-                    console.error('💡 Solution:', errorDetails);
-                }
-                
-                submitButton.textContent = errorMessage;
-                submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-                
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                }, 3000);
-            }
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.style.background = '';
+            }, 3000);
         });
     }
 
@@ -525,110 +446,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle booking form submission
     if (bookingForm) {
-        bookingForm.addEventListener('submit', async function(e) {
+        bookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
+            
+            // Here you would typically send the data to a server or calendar service
+            console.log('Booking submitted:', data);
+            
+            // Show success message
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
+            submitButton.textContent = 'Booking Confirmed!';
+            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
             
-            // Disable button during submission
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
+            // Reset form
+            this.reset();
             
-            try {
-                // Wait for Firebase to be ready
-                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
-                    // Wait a bit and try again
-                    await new Promise(resolve => {
-                        if (window.firebaseReady && window.firebaseDb) {
-                            resolve();
-                        } else {
-                            window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 2000); // Timeout after 2 seconds
-                        }
-                    });
-                    
-                    if (typeof window.firebaseDb === 'undefined') {
-                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
-                    }
-                }
-                
-                // Import Firestore functions
-                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
-                
-                console.log('Submitting booking to Firebase...', data);
-                
-                // Add booking to Firestore
-                const docRef = await addDoc(collection(window.firebaseDb, 'bookings'), {
-                    name: data.name,
-                    email: data.email,
-                    date: data.date,
-                    time: data.time,
-                    message: data.message || '',
-                    createdAt: serverTimestamp(),
-                    status: 'pending'
-                });
-                
-                console.log('Booking submitted successfully! Document ID:', docRef.id);
-                
-                // Show success message
-                submitButton.textContent = 'Booking Confirmed!';
-                submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                
-                // Reset form
-                this.reset();
-                
-                // Close modal after 2 seconds
-                setTimeout(() => {
-                    closeModal();
-                    submitButton.textContent = originalText;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                }, 2000);
-            } catch (error) {
-                console.error('❌ Error submitting booking:', error);
-                console.error('Error details:', {
-                    message: error.message,
-                    code: error.code,
-                    name: error.name,
-                    stack: error.stack
-                });
-                
-                // Show user-friendly error message
-                let errorMessage = 'Error - Please try again';
-                let errorDetails = '';
-                
-                if (error.code === 'permission-denied' || error.message?.includes('permission')) {
-                    errorMessage = 'Permission denied - Check Firestore rules';
-                    errorDetails = 'Go to Firebase Console → Firestore → Rules tab and update security rules. See FIRESTORE_RULES.md for instructions.';
-                    console.error('🔒 Firestore security rules need to be updated!');
-                    console.error('📋 Instructions: Check FIRESTORE_RULES.md file');
-                } else if (error.code === 'unavailable' || error.message?.includes('network')) {
-                    errorMessage = 'Network error - Check connection';
-                    errorDetails = 'Please check your internet connection and try again.';
-                } else if (error.message?.includes('not initialized') || error.message?.includes('Firebase')) {
-                    errorMessage = 'Firebase not ready - Refresh page';
-                    errorDetails = 'Firebase may not be loaded. Please refresh the page.';
-                } else if (error.code) {
-                    errorMessage = `Error: ${error.code}`;
-                    errorDetails = error.message || 'An unexpected error occurred.';
-                }
-                
-                if (errorDetails) {
-                    console.error('💡 Solution:', errorDetails);
-                }
-                
-                submitButton.textContent = errorMessage;
-                submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-                
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                }, 3000);
-            }
+            // Close modal after 2 seconds
+            setTimeout(() => {
+                closeModal();
+                submitButton.textContent = originalText;
+                submitButton.style.background = '';
+            }, 2000);
         });
     }
 
