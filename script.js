@@ -170,28 +170,27 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Sending...';
             
             try {
-                // Wait for Firebase to be ready (max 5 seconds)
-                let attempts = 0;
-                while ((!window.firebaseReady || typeof window.firebaseDb === 'undefined') && attempts < 10) {
+                // Wait for Firebase to be ready
+                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
+                    // Wait a bit and try again
                     await new Promise(resolve => {
                         if (window.firebaseReady && window.firebaseDb) {
                             resolve();
                         } else {
                             window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 500);
+                            setTimeout(resolve, 2000); // Timeout after 2 seconds
                         }
                     });
-                    attempts++;
-                }
-                
-                if (typeof window.firebaseDb === 'undefined') {
-                    throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    
+                    if (typeof window.firebaseDb === 'undefined') {
+                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    }
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
-                console.log('📤 Submitting contact form to Firebase...', data);
+                console.log('Submitting contact form to Firebase...', data);
                 
                 // Add contact form submission to Firestore
                 const docRef = await addDoc(collection(window.firebaseDb, 'contacts'), {
@@ -200,13 +199,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     company: data.company || '',
                     message: data.message,
                     createdAt: serverTimestamp(),
-                    status: 'new',
-                    submittedAt: new Date().toISOString()
+                    status: 'new'
                 });
                 
-                console.log('✅ Contact form submitted successfully!');
-                console.log('📄 Document ID:', docRef.id);
-                console.log('🔗 View in Firebase Console: https://console.firebase.google.com/project/modulragency/firestore/data/~2Fcontacts~2F' + docRef.id);
+                console.log('Contact form submitted successfully! Document ID:', docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Message Sent!';
@@ -226,16 +222,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error details:', {
                     message: error.message,
                     code: error.code,
+                    name: error.name,
                     stack: error.stack
                 });
                 
                 // Show user-friendly error message
                 let errorMessage = 'Error - Please try again';
-                if (error.code === 'permission-denied') {
+                let errorDetails = '';
+                
+                if (error.code === 'permission-denied' || error.message?.includes('permission')) {
                     errorMessage = 'Permission denied - Check Firestore rules';
+                    errorDetails = 'Go to Firebase Console → Firestore → Rules tab and update security rules. See FIRESTORE_RULES.md for instructions.';
                     console.error('🔒 Firestore security rules need to be updated!');
-                } else if (error.message.includes('not initialized')) {
+                    console.error('📋 Instructions: Check FIRESTORE_RULES.md file');
+                } else if (error.code === 'unavailable' || error.message?.includes('network')) {
+                    errorMessage = 'Network error - Check connection';
+                    errorDetails = 'Please check your internet connection and try again.';
+                } else if (error.message?.includes('not initialized') || error.message?.includes('Firebase')) {
                     errorMessage = 'Firebase not ready - Refresh page';
+                    errorDetails = 'Firebase may not be loaded. Please refresh the page.';
+                } else if (error.code) {
+                    errorMessage = `Error: ${error.code}`;
+                    errorDetails = error.message || 'An unexpected error occurred.';
+                }
+                
+                if (errorDetails) {
+                    console.error('💡 Solution:', errorDetails);
                 }
                 
                 submitButton.textContent = errorMessage;
@@ -526,28 +538,27 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Submitting...';
             
             try {
-                // Wait for Firebase to be ready (max 5 seconds)
-                let attempts = 0;
-                while ((!window.firebaseReady || typeof window.firebaseDb === 'undefined') && attempts < 10) {
+                // Wait for Firebase to be ready
+                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
+                    // Wait a bit and try again
                     await new Promise(resolve => {
                         if (window.firebaseReady && window.firebaseDb) {
                             resolve();
                         } else {
                             window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 500);
+                            setTimeout(resolve, 2000); // Timeout after 2 seconds
                         }
                     });
-                    attempts++;
-                }
-                
-                if (typeof window.firebaseDb === 'undefined') {
-                    throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    
+                    if (typeof window.firebaseDb === 'undefined') {
+                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    }
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
-                console.log('📤 Submitting booking to Firebase...', data);
+                console.log('Submitting booking to Firebase...', data);
                 
                 // Add booking to Firestore
                 const docRef = await addDoc(collection(window.firebaseDb, 'bookings'), {
@@ -557,13 +568,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     time: data.time,
                     message: data.message || '',
                     createdAt: serverTimestamp(),
-                    status: 'pending',
-                    submittedAt: new Date().toISOString()
+                    status: 'pending'
                 });
                 
-                console.log('✅ Booking submitted successfully!');
-                console.log('📄 Document ID:', docRef.id);
-                console.log('🔗 View in Firebase Console: https://console.firebase.google.com/project/modulragency/firestore/data/~2Fbookings~2F' + docRef.id);
+                console.log('Booking submitted successfully! Document ID:', docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Booking Confirmed!';
@@ -584,16 +592,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error details:', {
                     message: error.message,
                     code: error.code,
+                    name: error.name,
                     stack: error.stack
                 });
                 
                 // Show user-friendly error message
                 let errorMessage = 'Error - Please try again';
-                if (error.code === 'permission-denied') {
+                let errorDetails = '';
+                
+                if (error.code === 'permission-denied' || error.message?.includes('permission')) {
                     errorMessage = 'Permission denied - Check Firestore rules';
+                    errorDetails = 'Go to Firebase Console → Firestore → Rules tab and update security rules. See FIRESTORE_RULES.md for instructions.';
                     console.error('🔒 Firestore security rules need to be updated!');
-                } else if (error.message.includes('not initialized')) {
+                    console.error('📋 Instructions: Check FIRESTORE_RULES.md file');
+                } else if (error.code === 'unavailable' || error.message?.includes('network')) {
+                    errorMessage = 'Network error - Check connection';
+                    errorDetails = 'Please check your internet connection and try again.';
+                } else if (error.message?.includes('not initialized') || error.message?.includes('Firebase')) {
                     errorMessage = 'Firebase not ready - Refresh page';
+                    errorDetails = 'Firebase may not be loaded. Please refresh the page.';
+                } else if (error.code) {
+                    errorMessage = `Error: ${error.code}`;
+                    errorDetails = error.message || 'An unexpected error occurred.';
+                }
+                
+                if (errorDetails) {
+                    console.error('💡 Solution:', errorDetails);
                 }
                 
                 submitButton.textContent = errorMessage;
