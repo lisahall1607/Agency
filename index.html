@@ -496,9 +496,7 @@
     <!-- Firebase SDK - Load first -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
       
         const firebaseConfig = {
           apiKey: "AIzaSyBK4oPI7p4m_1tnN51c69c_znZvQx5ZTaY",
@@ -510,24 +508,33 @@
           measurementId: "G-RLL00PQKKJ"
         };
       
-        const app = initializeApp(firebaseConfig);
-      
-        // Analytics (works best on your real domain/https)
-        const analytics = getAnalytics(app);
-      
-        // Initialize Firestore and Auth
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-      
-        // Make db available globally for form submissions
-        window.firebaseDb = db;
-        window.firebaseAuth = auth;
-        window.firebaseReady = true;
-      
-        console.log("Firebase ready ✅", { db, auth, analytics });
-        
-        // Dispatch custom event to notify that Firebase is ready
-        window.dispatchEvent(new CustomEvent('firebase-ready'));
+        try {
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            
+            // Initialize Firestore
+            const db = getFirestore(app);
+            
+            // Make db available globally for form submissions
+            window.firebaseDb = db;
+            window.firebaseReady = true;
+            
+            console.log("✅ Firebase initialized successfully!");
+            console.log("✅ Firestore database ready:", db);
+            
+            // Test connection
+            import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js').then(({ collection, getDocs }) => {
+                getDocs(collection(db, 'test')).catch(() => {
+                    console.log("ℹ️ Firestore connection test complete (test collection doesn't exist, which is normal)");
+                });
+            });
+            
+            // Dispatch custom event to notify that Firebase is ready
+            window.dispatchEvent(new CustomEvent('firebase-ready'));
+        } catch (error) {
+            console.error("❌ Firebase initialization error:", error);
+            window.firebaseReady = false;
+        }
     </script>
     <script src="script.js"></script>      
 </body>

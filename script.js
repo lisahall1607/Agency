@@ -170,27 +170,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Sending...';
             
             try {
-                // Wait for Firebase to be ready
-                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
-                    // Wait a bit and try again
+                // Wait for Firebase to be ready (max 5 seconds)
+                let attempts = 0;
+                while ((!window.firebaseReady || typeof window.firebaseDb === 'undefined') && attempts < 10) {
                     await new Promise(resolve => {
                         if (window.firebaseReady && window.firebaseDb) {
                             resolve();
                         } else {
                             window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 2000); // Timeout after 2 seconds
+                            setTimeout(resolve, 500);
                         }
                     });
-                    
-                    if (typeof window.firebaseDb === 'undefined') {
-                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
-                    }
+                    attempts++;
+                }
+                
+                if (typeof window.firebaseDb === 'undefined') {
+                    throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
-                console.log('Submitting contact form to Firebase...', data);
+                console.log('📤 Submitting contact form to Firebase...', data);
                 
                 // Add contact form submission to Firestore
                 const docRef = await addDoc(collection(window.firebaseDb, 'contacts'), {
@@ -199,10 +200,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     company: data.company || '',
                     message: data.message,
                     createdAt: serverTimestamp(),
-                    status: 'new'
+                    status: 'new',
+                    submittedAt: new Date().toISOString()
                 });
                 
-                console.log('Contact form submitted successfully! Document ID:', docRef.id);
+                console.log('✅ Contact form submitted successfully!');
+                console.log('📄 Document ID:', docRef.id);
+                console.log('🔗 View in Firebase Console: https://console.firebase.google.com/project/modulragency/firestore/data/~2Fcontacts~2F' + docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Message Sent!';
@@ -522,27 +526,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Submitting...';
             
             try {
-                // Wait for Firebase to be ready
-                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
-                    // Wait a bit and try again
+                // Wait for Firebase to be ready (max 5 seconds)
+                let attempts = 0;
+                while ((!window.firebaseReady || typeof window.firebaseDb === 'undefined') && attempts < 10) {
                     await new Promise(resolve => {
                         if (window.firebaseReady && window.firebaseDb) {
                             resolve();
                         } else {
                             window.addEventListener('firebase-ready', resolve, { once: true });
-                            setTimeout(resolve, 2000); // Timeout after 2 seconds
+                            setTimeout(resolve, 500);
                         }
                     });
-                    
-                    if (typeof window.firebaseDb === 'undefined') {
-                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
-                    }
+                    attempts++;
+                }
+                
+                if (typeof window.firebaseDb === 'undefined') {
+                    throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
-                console.log('Submitting booking to Firebase...', data);
+                console.log('📤 Submitting booking to Firebase...', data);
                 
                 // Add booking to Firestore
                 const docRef = await addDoc(collection(window.firebaseDb, 'bookings'), {
@@ -552,10 +557,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     time: data.time,
                     message: data.message || '',
                     createdAt: serverTimestamp(),
-                    status: 'pending'
+                    status: 'pending',
+                    submittedAt: new Date().toISOString()
                 });
                 
-                console.log('Booking submitted successfully! Document ID:', docRef.id);
+                console.log('✅ Booking submitted successfully!');
+                console.log('📄 Document ID:', docRef.id);
+                console.log('🔗 View in Firebase Console: https://console.firebase.google.com/project/modulragency/firestore/data/~2Fbookings~2F' + docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Booking Confirmed!';
