@@ -218,8 +218,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitButton.disabled = false;
                 }, 3000);
             } catch (error) {
-                console.error('Error submitting contact form:', error);
-                submitButton.textContent = 'Error - Please try again';
+                console.error('❌ Error submitting contact form:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    code: error.code,
+                    stack: error.stack
+                });
+                
+                // Show user-friendly error message
+                let errorMessage = 'Error - Please try again';
+                if (error.code === 'permission-denied') {
+                    errorMessage = 'Permission denied - Check Firestore rules';
+                    console.error('🔒 Firestore security rules need to be updated!');
+                } else if (error.message.includes('not initialized')) {
+                    errorMessage = 'Firebase not ready - Refresh page';
+                }
+                
+                submitButton.textContent = errorMessage;
                 submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
                 
                 setTimeout(() => {
@@ -557,8 +572,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitButton.disabled = false;
                 }, 2000);
             } catch (error) {
-                console.error('Error submitting booking:', error);
-                submitButton.textContent = 'Error - Please try again';
+                console.error('❌ Error submitting booking:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    code: error.code,
+                    stack: error.stack
+                });
+                
+                // Show user-friendly error message
+                let errorMessage = 'Error - Please try again';
+                if (error.code === 'permission-denied') {
+                    errorMessage = 'Permission denied - Check Firestore rules';
+                    console.error('🔒 Firestore security rules need to be updated!');
+                } else if (error.message.includes('not initialized')) {
+                    errorMessage = 'Firebase not ready - Refresh page';
+                }
+                
+                submitButton.textContent = errorMessage;
                 submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
                 
                 setTimeout(() => {
