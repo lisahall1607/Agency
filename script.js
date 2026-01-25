@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Import Firestore functions
-                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
                 // Add contact form submission to Firestore
                 await addDoc(collection(window.firebaseDb, 'contacts'), {
@@ -497,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Import Firestore functions
-                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
                 // Add booking to Firestore
                 await addDoc(collection(window.firebaseDb, 'bookings'), {
