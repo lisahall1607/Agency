@@ -170,16 +170,30 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Sending...';
             
             try {
-                // Check if Firebase is initialized
-                if (typeof window.firebaseDb === 'undefined') {
-                    throw new Error('Firebase not initialized. Please check your Firebase configuration.');
+                // Wait for Firebase to be ready
+                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
+                    // Wait a bit and try again
+                    await new Promise(resolve => {
+                        if (window.firebaseReady && window.firebaseDb) {
+                            resolve();
+                        } else {
+                            window.addEventListener('firebase-ready', resolve, { once: true });
+                            setTimeout(resolve, 2000); // Timeout after 2 seconds
+                        }
+                    });
+                    
+                    if (typeof window.firebaseDb === 'undefined') {
+                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    }
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
+                console.log('Submitting contact form to Firebase...', data);
+                
                 // Add contact form submission to Firestore
-                await addDoc(collection(window.firebaseDb, 'contacts'), {
+                const docRef = await addDoc(collection(window.firebaseDb, 'contacts'), {
                     name: data.name,
                     email: data.email,
                     company: data.company || '',
@@ -187,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     createdAt: serverTimestamp(),
                     status: 'new'
                 });
+                
+                console.log('Contact form submitted successfully! Document ID:', docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Message Sent!';
@@ -491,16 +507,30 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Submitting...';
             
             try {
-                // Check if Firebase is initialized
-                if (typeof window.firebaseDb === 'undefined') {
-                    throw new Error('Firebase not initialized. Please check your Firebase configuration.');
+                // Wait for Firebase to be ready
+                if (!window.firebaseReady || typeof window.firebaseDb === 'undefined') {
+                    // Wait a bit and try again
+                    await new Promise(resolve => {
+                        if (window.firebaseReady && window.firebaseDb) {
+                            resolve();
+                        } else {
+                            window.addEventListener('firebase-ready', resolve, { once: true });
+                            setTimeout(resolve, 2000); // Timeout after 2 seconds
+                        }
+                    });
+                    
+                    if (typeof window.firebaseDb === 'undefined') {
+                        throw new Error('Firebase not initialized. Please check your Firebase configuration and refresh the page.');
+                    }
                 }
                 
                 // Import Firestore functions
                 const { collection, addDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
                 
+                console.log('Submitting booking to Firebase...', data);
+                
                 // Add booking to Firestore
-                await addDoc(collection(window.firebaseDb, 'bookings'), {
+                const docRef = await addDoc(collection(window.firebaseDb, 'bookings'), {
                     name: data.name,
                     email: data.email,
                     date: data.date,
@@ -509,6 +539,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     createdAt: serverTimestamp(),
                     status: 'pending'
                 });
+                
+                console.log('Booking submitted successfully! Document ID:', docRef.id);
                 
                 // Show success message
                 submitButton.textContent = 'Booking Confirmed!';

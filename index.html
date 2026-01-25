@@ -493,7 +493,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Firebase SDK - Load first -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
@@ -515,15 +515,20 @@
         // Analytics (works best on your real domain/https)
         const analytics = getAnalytics(app);
       
-        // ✅ Add these:
+        // Initialize Firestore and Auth
         const db = getFirestore(app);
         const auth = getAuth(app);
       
         // Make db available globally for form submissions
         window.firebaseDb = db;
         window.firebaseAuth = auth;
+        window.firebaseReady = true;
       
         console.log("Firebase ready ✅", { db, auth, analytics });
-      </script>      
+        
+        // Dispatch custom event to notify that Firebase is ready
+        window.dispatchEvent(new CustomEvent('firebase-ready'));
+    </script>
+    <script src="script.js"></script>      
 </body>
 </html>
