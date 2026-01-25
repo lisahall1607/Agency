@@ -633,6 +633,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================
+    // Firebase Connection Test
+    // ============================================
+    
+    // Test Firebase connection after a short delay
+    setTimeout(async () => {
+        if (window.firebaseDb) {
+            try {
+                const { collection, getDocs } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
+                // Try to access Firestore (this will fail if rules don't allow, but connection works)
+                await getDocs(collection(window.firebaseDb, 'contacts'));
+                console.log('%c✅ Firebase connection: OK', 'color: #10b981; font-weight: bold;');
+            } catch (error) {
+                if (error.code === 'permission-denied') {
+                    console.warn('%c⚠️ Firebase connected but Firestore rules need updating', 'color: #f59e0b; font-weight: bold;');
+                    console.log('%c📋 See FIRESTORE_RULES.md for instructions', 'color: #6366f1;');
+                } else {
+                    console.error('%c❌ Firebase connection test failed:', 'color: #ef4444; font-weight: bold;', error);
+                }
+            }
+        } else {
+            console.warn('%c⚠️ Firebase not initialized', 'color: #f59e0b; font-weight: bold;');
+        }
+    }, 1000);
+
+    // ============================================
     // Console Easter Egg
     // ============================================
 
