@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Navbar background on scroll
     const nav = document.querySelector('.nav');
-    let lastScroll = 0;
 
     window.addEventListener('scroll', function() {
         const currentScroll = window.pageYOffset;
@@ -63,8 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.style.background = 'rgba(10, 10, 10, 0.8)';
             nav.style.borderBottomColor = 'rgba(255, 255, 255, 0.05)';
         }
-        
-        lastScroll = currentScroll;
     });
 
     // ============================================
