@@ -1,19 +1,36 @@
-# Dependencies
-node_modules/
-package-lock.json
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/install-state.gz
 
-# Editor directories and files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
+*.pem
 
-# Logs
-*.log
+# debug
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Build outputs
-dist/
-build/
+# env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
