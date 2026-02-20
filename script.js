@@ -153,33 +153,79 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form Handling
     // ============================================
 
+    // API endpoint URL - Update this to your deployed serverless function URL
+    // For Vercel: https://your-project.vercel.app/api/send-email
+    // For Netlify: https://your-site.netlify.app/.netlify/functions/send-email
+    // You can also set it in HTML: <script>window.API_ENDPOINT = 'your-url';</script>
+    const API_ENDPOINT = window.API_ENDPOINT || '/api/send-email';
+
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', data);
-            
-            // Show success message
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-            submitButton.textContent = 'Message Sent!';
-            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
             
-            // Reset form
-            this.reset();
+            // Disable button during submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
             
-            // Reset button after 3 seconds
-            setTimeout(() => {
-                submitButton.textContent = originalText;
-                submitButton.style.background = '';
-            }, 3000);
+            try {
+                // Send data to API endpoint
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: 'contact',
+                        name: data.name,
+                        email: data.email,
+                        company: data.company || '',
+                        message: data.message,
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+
+                console.log('Contact form submitted successfully:', result);
+                
+                // Show success message
+                submitButton.textContent = 'Message Sent!';
+                submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.background = '';
+                    submitButton.disabled = false;
+                }, 3000);
+            } catch (error) {
+                console.error('Error submitting contact form:', error);
+                
+                // Show error message
+                submitButton.textContent = 'Error - Please try again';
+                submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.background = '';
+                    submitButton.disabled = false;
+                }, 3000);
+            }
         });
     }
 
@@ -446,57 +492,72 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle booking form submission
     if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
+        bookingForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server or calendar service
-            console.log('Booking submitted:', data);
-            
-            // Show success message
             const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-            submitButton.textContent = 'Booking Confirmed!';
-            submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
             
-            // Reset form
-            this.reset();
+            // Disable button during submission
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
             
-            // Close modal after 2 seconds
-            setTimeout(() => {
-                closeModal();
-                submitButton.textContent = originalText;
-                submitButton.style.background = '';
-            }, 2000);
+            try {
+                // Send data to API endpoint
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: 'booking',
+                        name: data.name,
+                        email: data.email,
+                        date: data.date,
+                        time: data.time,
+                        message: data.message || '',
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to submit booking');
+                }
+
+                console.log('Booking submitted successfully:', result);
+                
+                // Show success message
+                submitButton.textContent = 'Booking Confirmed!';
+                submitButton.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                
+                // Reset form
+                this.reset();
+                
+                // Close modal after 2 seconds
+                setTimeout(() => {
+                    closeModal();
+                    submitButton.textContent = originalText;
+                    submitButton.style.background = '';
+                    submitButton.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                
+                // Show error message
+                submitButton.textContent = 'Error - Please try again';
+                submitButton.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+                
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.background = '';
+                    submitButton.disabled = false;
+                }, 3000);
+            }
         });
     }
-
-    // ============================================
-    // Firebase Connection Test
-    // ============================================
-    
-    // Test Firebase connection after a short delay
-    setTimeout(async () => {
-        if (window.firebaseDb) {
-            try {
-                const { collection, getDocs } = await import('https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js');
-                // Try to access Firestore (this will fail if rules don't allow, but connection works)
-                await getDocs(collection(window.firebaseDb, 'contacts'));
-                console.log('%c✅ Firebase connection: OK', 'color: #10b981; font-weight: bold;');
-            } catch (error) {
-                if (error.code === 'permission-denied') {
-                    console.warn('%c⚠️ Firebase connected but Firestore rules need updating', 'color: #f59e0b; font-weight: bold;');
-                    console.log('%c📋 See FIRESTORE_RULES.md for instructions', 'color: #6366f1;');
-                } else {
-                    console.error('%c❌ Firebase connection test failed:', 'color: #ef4444; font-weight: bold;', error);
-                }
-            }
-        } else {
-            console.warn('%c⚠️ Firebase not initialized', 'color: #f59e0b; font-weight: bold;');
-        }
-    }, 1000);
 
     // ============================================
     // Console Easter Egg
